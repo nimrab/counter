@@ -1,0 +1,24 @@
+.setScreenBox {
+    width: 350px;
+}
+
+.spanText {
+    font-size: 25px;
+    font-weight: 700;
+    padding: 10px;
+    margin-right: 4 0px;
+    color: #000000;
+    display: inline-block;
+    width: 160px;
+}
+
+
+.value_input_box {
+    margin-bottom: 35px;
+}
+.input {
+    font-size: 18px;
+    font-weight: 700;
+    width: 70px;
+    text-align: center;
+}

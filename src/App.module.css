@@ -3,11 +3,15 @@ body {
 }
 
 .main {
-    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.screen {
+    margin: 300px 70px 50px 70px;
     outline: 3px solid #78d0d0;
     width: 400px;
     height: 320px;
-    margin-top: 300px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;

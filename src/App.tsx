@@ -1,60 +1,90 @@
 import React, {useState} from 'react';
 import './App.module.css';
-import {Screen} from "./Screen/Screen";
-import {Button} from "./Button/Button";
 import css from './App.module.css'
+import {CountComponent} from "./CountCopmponent/CountComponent";
+import {SetComponent} from "./SetComponent/SetComponent";
+
+export type AppType = {
+    startCount: number
+    maxCount: number
+    currentCount: number
+    error: boolean
+    valueIsSet: boolean
+}
 
 
-function App() {
+const App = () => {
 
-    const maxCounter = 5
-    const resetCounter = 0
-
-    let [counter, setCounter] = useState<number>(0)
-
-
-    const incrementCallbackHandler = () => {
-        if (counter < 5) {
-            setCounter(++counter)
-        }
+    const initialState: AppType = {
+        startCount: 0,
+        maxCount: 15,
+        currentCount: 0,
+        error: false,
+        valueIsSet: false
     }
 
-    const resetCallbackHandler = () => {
-        setCounter(resetCounter)
+
+    const [state, setState] = useState<AppType>(initialState)
+
+
+    const incrementCount = () => {
+        setState({...state, currentCount: state.currentCount + 1})
+    }
+
+    const resetCount = () => {
+        setState({...state, currentCount: state.startCount})
     }
 
 
-    const disableInc = counter === maxCounter
-    const disableReset = counter === resetCounter
+    const setMaxValue = (value: number) => {
+        setState({...state, maxCount: value, valueIsSet: false})
+    }
+
+    const setStartValue = (value: number) => {
+        setState({...state, startCount: value, valueIsSet: false, currentCount: value})
+
+    }
 
 
-    const className = css.button
-    //const classNameDisableInc = `${css.button} ${disableInc ? css.disable : ''}` дизейбл и так цвет серым делаем
-    //const classNameDisableReset = `${css.button} ${disableReset ? css.disable : ''}` дизейбл и так цвет серым делаем
+    const setValueByButton = () => {
+        setState({...state, valueIsSet: !state.valueIsSet})
+    }
+
+
+    const disableInc = (state.currentCount === state.maxCount) || (!state.valueIsSet)
+    const disableReset = (state.currentCount === state.startCount) || (!state.valueIsSet)
+    const disableSet = (state.startCount < 0) || (state.startCount >= state.maxCount) || (state.valueIsSet)
+
+
+    const btnClassName = css.button
 
 
     return (
+
         <div className={css.main}>
 
-            <Screen
-                counter={counter}
-                maxCounter={maxCounter}
-            />
 
-
-            <div className={css.button_block}>
-                <Button
-                    name={'inc'}
-                    callback={incrementCallbackHandler}
-                    className={className}
-                    disable={disableInc}
+            <div className={css.screen}>
+                <SetComponent
+                    state={state}
+                    setMaxValue={setMaxValue}
+                    setStartValue={setStartValue}
+                    setValueByButton={setValueByButton}
+                    disableSet={disableSet}
+                    btnClassName={btnClassName}
                 />
 
-                <Button
-                    name={'reset'}
-                    callback={resetCallbackHandler}
-                    className={className}
-                    disable={disableReset}
+            </div>
+
+            <div className={css.screen}>
+
+                <CountComponent
+                    state={state}
+                    incrementCount={incrementCount}
+                    resetCount={resetCount}
+                    disableInc={disableInc}
+                    disableReset={disableReset}
+                    btnClassName={btnClassName}
                 />
 
             </div>
