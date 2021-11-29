@@ -23,52 +23,56 @@ type CountComponentPropsType = {
 
 export const CountComponent = (props: CountComponentPropsType) => {
 
-
-
-
     return (
         <>
 
             {props.valueIsSet
-                ? <CountScreen
-                    currentCount={props.state.currentCount}
-                    maxCount={props.state.maxCount}
-                    valueIsSet={props.state.valueIsSet}
-                />
-                : <SetScreen
-                    setMaxValue={props.setMaxValue}
-                    setStartValue={props.setStartValue}
-                    startCount={props.state.startCount}
-                    maxCount={props.state.maxCount}
-                    error={props.error}
-                />}
+                ? <>
+                    <CountScreen
+                        currentCount={props.state.currentCount}
+                        maxCount={props.state.maxCount}
+                        valueIsSet={props.state.valueIsSet}
+                    />
+                    <div className={css.button_block}>
+                        <Button
+                            name={'inc'}
+                            callback={props.incrementCount}
+                            className={props.btnClassName}
+                            disable={props.disableInc}
+                        />
+                        <Button
+                            name={'reset'}
+                            callback={props.resetCount}
+                            className={props.btnClassName}
+                            disable={props.disableReset}
+                        />
+                        <Button
+                            name={'set'}
+                            callback={props.setValueByButton}
+                            className={props.btnClassName}
+                            error={props.error}
+                        />
+                    </div>
 
-
-            <div className={css.button_block}>
-
-                <Button
-                    name={'inc'}
-                    callback={props.incrementCount}
-                    className={props.btnClassName}
-                    disable={props.disableInc}
-                />
-
-                <Button
-                    name={'reset'}
-                    callback={props.resetCount}
-                    className={props.btnClassName}
-                    disable={props.disableReset}
-                />
-
-                <Button
-                    name={'set'}
-                    callback={props.setValueByButton}
-                    className={props.btnClassName}
-                    disable={props.disableSet}
-                />
-
-            </div>
-        </>
-    )
-}
+                </>
+                : <>
+                    <SetScreen
+                        setMaxValue={props.setMaxValue}
+                        setStartValue={props.setStartValue}
+                        startCount={props.state.startCount}
+                        maxCount={props.state.maxCount}
+                        error={props.error}
+                    />
+                    <div className={css.button_block}>
+                        <Button
+                            name={'set'}
+                            callback={props.setValueByButton}
+                            className={props.btnClassName}
+                            error={props.error}
+                        />
+                    </div>
+                </>}
+</>
+)
+            }
 

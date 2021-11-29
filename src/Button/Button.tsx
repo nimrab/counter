@@ -5,6 +5,7 @@ type ButtonPropsType = {
     callback: () => void
     className?: string
     disable?: boolean
+    error?: boolean
 }
 
 
@@ -19,12 +20,10 @@ export const Button = (props:ButtonPropsType) => {
         <button
             className={props.className}
             onClick={onClickHandler}
-            disabled={props.disable}
+            disabled={props.error ?? props.disable}
         >
             {props.name}
         </button>
 
     )
-
-
 }

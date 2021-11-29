@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import './App.module.css';
 import css from './App.module.css'
 import {CountComponent} from "./CountCopmponent/CountComponent";
-import {SetComponent} from "./SetComponent/SetComponent";
 
 export type AppType = {
     startCount: number
@@ -38,6 +37,7 @@ export const App = () => {
     }
     const setValueByButton = () => {
         setState({...state, valueIsSet: !state.valueIsSet})
+
     }
 
 

@@ -6,8 +6,8 @@ import {SetScreen} from "../SetScreen/SetScreen";
 
 type SetComponentPropsType = {
     state: AppType
-    setMaxValue: (value: number) => void
-    setStartValue: (value: number) => void
+        setMaxValue: (value: number) => void
+        setStartValue: (value: number) => void
     setValueByButton: () => void
     disableSet: boolean
     btnClassName: string

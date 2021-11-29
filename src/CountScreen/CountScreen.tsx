@@ -18,7 +18,6 @@ export const CountScreen = (props: ScreenPropsType) => {
 
         <div className={className}>
 
-
             {
                 props.valueIsSet
                 ? props.currentCount
