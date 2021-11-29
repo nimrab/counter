@@ -17,12 +17,6 @@ export const CountScreen = (props: ScreenPropsType) => {
     return (
 
         <div className={className}>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-
             {
                 props.valueIsSet
                 ? props.currentCount
