@@ -12,7 +12,7 @@ export type AppType = {
     valueIsSet: boolean
 }
 
-const App = () => {
+export const App = () => {
 
     const initialState: AppType = {
         startCount: 0,
@@ -85,4 +85,3 @@ const App = () => {
     )
 }
 
-export default App;
