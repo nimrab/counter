@@ -7,13 +7,13 @@ type SetScreenPropsType = {
     setStartValue: (value: number) => void
     startCount: number
     maxCount: number
+    error: boolean
 }
-
 
 export const SetScreen = (props: SetScreenPropsType) => {
 
 
-    // const className = `${css.screen} ${props.currentCount === props.maxCount ? css.red : ""}`
+    const inputClassName = `${css.input} ${props.error ? css.screen_error : ''}`
 
     return (
 
@@ -22,7 +22,7 @@ export const SetScreen = (props: SetScreenPropsType) => {
             <div className={css.value_input_box}>
                 <span className={css.spanText}>max value:</span>
                 <input
-                    className={css.input}
+                    className={inputClassName}
                     value={props.maxCount}
                     type="number"
                     onChange={(event) => props.setMaxValue(+event.currentTarget.value)}
@@ -32,7 +32,7 @@ export const SetScreen = (props: SetScreenPropsType) => {
             <div>
                 <span className={css.spanText}>start value:</span>
                 <input
-                    className={css.input}
+                    className={inputClassName}
                     value={props.startCount}
                     type="number"
                     onChange={(event) => props.setStartValue(+event.currentTarget.value)}

@@ -22,3 +22,8 @@
     width: 70px;
     text-align: center;
 }
+
+.screen_error {
+    outline: 1px solid red;
+    background-color: #c47e7e;
+}

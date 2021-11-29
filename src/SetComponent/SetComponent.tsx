@@ -11,6 +11,7 @@ type SetComponentPropsType = {
     setValueByButton: () => void
     disableSet: boolean
     btnClassName: string
+    error: boolean
 }
 
 
@@ -22,6 +23,7 @@ export const SetComponent = (props: SetComponentPropsType) => {
                 setStartValue={props.setStartValue}
                 startCount={props.state.startCount}
                 maxCount={props.state.maxCount}
+                error={props.error}
             />
 
             <div className={css.button_block}>
