@@ -14,20 +14,30 @@ export type AppType = {
 
 export const App = () => {
 
-    const initialState: AppType = {
-        startCount: 0,
-        maxCount: 15,
-        currentCount: 0,
-        error: false,
-        valueIsSet: false
-    }
+    const initialStartCount = localStorage.getItem('startCount')
+    const initialMaxCount = localStorage.getItem('maxCount')
+    const initialCurrentCount = localStorage.getItem('currentCount')
+
+    const dataReceivedFromLocalStorage = initialStartCount && initialMaxCount && initialCurrentCount
+
+
+           const initialState: AppType = {
+                startCount: dataReceivedFromLocalStorage ? JSON.parse(initialStartCount) : 0,
+                maxCount: dataReceivedFromLocalStorage ? JSON.parse(initialMaxCount) : 5,
+                currentCount: dataReceivedFromLocalStorage ? JSON.parse(initialCurrentCount) : 0,
+                error: false,
+                valueIsSet: !!dataReceivedFromLocalStorage
+        }
 
     const [state, setState] = useState<AppType>(initialState)
 
     const incrementCount = () => {
+        localStorage.setItem('currentCount', JSON.stringify(state.currentCount + 1))
         setState({...state, currentCount: state.currentCount + 1})
+
     }
     const resetCount = () => {
+        localStorage.setItem('currentCount', JSON.stringify(state.startCount))
         setState({...state, currentCount: state.startCount})
     }
     const setMaxValue = (value: number) => {
@@ -37,9 +47,11 @@ export const App = () => {
         setState({...state, startCount: value, valueIsSet: false, currentCount: value})
     }
     const setValueByButton = () => {
+        localStorage.setItem('startCount', JSON.stringify(state.startCount))
+        localStorage.setItem('maxCount', JSON.stringify(state.maxCount))
+        localStorage.removeItem('currentCount')
         setState({...state, valueIsSet: !state.valueIsSet})
     }
-
 
 
     const disableInc = (state.currentCount === state.maxCount) || (!state.valueIsSet)
