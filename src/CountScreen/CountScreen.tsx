@@ -19,11 +19,11 @@ export const CountScreen = (props: ScreenPropsType) => {
         <div className={className}>
 
 
-            {
-                props.valueIsSet
-                ? props.currentCount
-                : <span className={css.span_set}>setting value...</span>
-            }
+            {/*{*/}
+            {/*    props.valueIsSet*/}
+            {/*    ? props.currentCount*/}
+            {/*    : <span className={css.span_set}>setting value...</span>*/}
+            {/*}*/}
 
         </div>
 
