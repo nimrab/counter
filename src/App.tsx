@@ -16,7 +16,7 @@ export const App = () => {
 
     const initialState: AppType = {
         startCount: 0,
-        maxCount: 15,
+        maxCount: 5,
         currentCount: 0,
         error: false,
         valueIsSet: false
@@ -54,28 +54,21 @@ export const App = () => {
 
         <div className={css.main}>
 
-
             <div className={css.screen}>
-                <SetComponent
-                    state={state}
-                    setMaxValue={setMaxValue}
-                    setStartValue={setStartValue}
-                    setValueByButton={setValueByButton}
-                    disableSet={disableSet}
-                    btnClassName={btnClassName}
-                    error={error}
-                />
 
-            </div>
-
-            <div className={css.screen}>
                 <CountComponent
                     state={state}
                     incrementCount={incrementCount}
                     resetCount={resetCount}
+                    setValueByButton={setValueByButton}
+                    setMaxValue={setMaxValue}
+                    setStartValue={setStartValue}
                     disableInc={disableInc}
                     disableReset={disableReset}
+                    disableSet={disableSet}
                     btnClassName={btnClassName}
+                    valueIsSet={state.valueIsSet}
+                    error={error}
                 />
 
             </div>
