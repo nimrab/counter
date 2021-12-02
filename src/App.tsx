@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.module.css';
 import css from './App.module.css'
 import {CountComponent} from "./CountCopmponent/CountComponent";
@@ -14,30 +14,55 @@ export type AppType = {
 
 export const App = () => {
 
-    const initialStartCount = localStorage.getItem('startCount')
-    const initialMaxCount = localStorage.getItem('maxCount')
-    const initialCurrentCount = localStorage.getItem('currentCount')
 
+    const getFromLocalStorage = (itemName: string) => {
+        const value = localStorage.getItem(itemName)
+        if (value) {
+            return JSON.parse(value)
+        }
+    }
+
+    const setToLocalStorage = (itemName: string, value: number) => {
+        localStorage.setItem(itemName, JSON.stringify(value))
+    }
+
+    const initialStartCount = getFromLocalStorage('startCount')
+    const initialMaxCount = getFromLocalStorage('maxCount')
+    const initialCurrentCount = getFromLocalStorage('currentCount')
     const dataReceivedFromLocalStorage = initialStartCount && initialMaxCount && initialCurrentCount
 
 
-           const initialState: AppType = {
-                startCount: dataReceivedFromLocalStorage ? JSON.parse(initialStartCount) : 0,
-                maxCount: dataReceivedFromLocalStorage ? JSON.parse(initialMaxCount) : 5,
-                currentCount: dataReceivedFromLocalStorage ? JSON.parse(initialCurrentCount) : 0,
+    const [state, setState] = useState<AppType>({
+            startCount: 0,
+            maxCount: 5,
+            currentCount: 0,
+            error: false,
+            valueIsSet: false
+        }
+    )
+
+    useEffect(() => {
+
+        if (dataReceivedFromLocalStorage !== undefined) {
+            setState({
+                startCount: initialStartCount,
+                maxCount: initialMaxCount,
+                currentCount: initialCurrentCount,
                 error: false,
                 valueIsSet: !!dataReceivedFromLocalStorage
+            })
         }
 
-    const [state, setState] = useState<AppType>(initialState)
+    }, [])
+
 
     const incrementCount = () => {
-        localStorage.setItem('currentCount', JSON.stringify(state.currentCount + 1))
+        setToLocalStorage('currentCount', state.currentCount + 1)
         setState({...state, currentCount: state.currentCount + 1})
 
     }
     const resetCount = () => {
-        localStorage.setItem('currentCount', JSON.stringify(state.startCount))
+        setToLocalStorage('currentCount', state.startCount)
         setState({...state, currentCount: state.startCount})
     }
     const setMaxValue = (value: number) => {
@@ -47,8 +72,9 @@ export const App = () => {
         setState({...state, startCount: value, valueIsSet: false, currentCount: value})
     }
     const setValueByButton = () => {
-        localStorage.setItem('startCount', JSON.stringify(state.startCount))
-        localStorage.setItem('maxCount', JSON.stringify(state.maxCount))
+
+        setToLocalStorage('startCount', state.startCount)
+        setToLocalStorage('maxCount', state.maxCount)
         localStorage.removeItem('currentCount')
         setState({...state, valueIsSet: !state.valueIsSet})
     }
