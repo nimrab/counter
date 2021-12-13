@@ -4,7 +4,7 @@ import css from "../App.module.css";
 import {Button} from "../Button/Button";
 import {AppType} from "../App";
 import {useDispatch, useSelector} from "react-redux";
-import {rootReducerType} from "../bll/store/store";
+import {RootReducerType} from "../bll/store/store";
 import {setCurrentCountAC} from "../bll/store/counter-reducer";
 
 
@@ -18,7 +18,7 @@ type CountComponentPropsType = {
 export const CountComponent = (props: CountComponentPropsType) => {
 
     const dispatch = useDispatch()
-    const counter = useSelector<rootReducerType, AppType>(state=> state.counter)
+    const counter = useSelector<RootReducerType, AppType>(state=> state.counter)
 
     const incrementCount = () => {
         //increase counter by 1

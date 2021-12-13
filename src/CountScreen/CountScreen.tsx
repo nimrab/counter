@@ -5,12 +5,9 @@ type ScreenPropsType = {
     maxCount: number
     currentCount: number
     valueIsSet:boolean
-    startCount?: number
 }
 
-
 export const CountScreen = (props: ScreenPropsType) => {
-
 
     const className=`${css.screen} ${props.currentCount === props.maxCount && props.valueIsSet ? css.red : ""}`
 

@@ -15,7 +15,6 @@ export const Button = (props:ButtonPropsType) => {
     }
 
     return (
-
         <button
             className={props.className}
             onClick={onClickHandler}

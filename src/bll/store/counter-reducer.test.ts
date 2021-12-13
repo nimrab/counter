@@ -14,7 +14,6 @@ test('counter should apply value', () => {
         startCount: 0,
         maxCount: 10,
         currentCount: 0,
-        error: false,
         valueIsSet: false,
     }
 
@@ -32,7 +31,6 @@ test('counter should apply start value', () => {
         startCount: 0,
         maxCount: 10,
         currentCount: 0,
-        error: false,
         valueIsSet: false,
     }
 
@@ -49,7 +47,6 @@ test('counter should apply max value', () => {
         startCount: 0,
         maxCount: 10,
         currentCount: 0,
-        error: false,
         valueIsSet: false,
     }
 
@@ -60,30 +57,12 @@ test('counter should apply max value', () => {
     expect(newState.maxCount).toBe(11)
 
 })
-test('counter should switch error value to opposite', () => {
-
-    const state = {
-        startCount: 0,
-        maxCount: 10,
-        currentCount: 0,
-        error: false,
-        valueIsSet: false,
-    }
-
-    const action = switchErrorAC(true)
-    const newState = counterReducer(state, action)
-
-    expect(state.error).toBe(false)
-    expect(newState.error).toBe(true)
-
-})
 test('counter should switch valueIsSet value to opposite', () => {
 
     const state = {
         startCount: 0,
         maxCount: 10,
         currentCount: 0,
-        error: false,
         valueIsSet: false,
     }
 

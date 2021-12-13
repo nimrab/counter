@@ -9,7 +9,6 @@ type initialStateType = {
     startCount: number
     maxCount: number
     currentCount: number
-    error: boolean
     valueIsSet: boolean
 }
 
@@ -17,7 +16,6 @@ const initialState = {
     startCount: 0,
     maxCount: 10,
     currentCount: 0,
-    error: false,
     valueIsSet: false,
 }
 
@@ -29,8 +27,6 @@ export const counterReducer = (state: initialStateType = initialState, action: C
             return {...state, startCount: action.value}
         case 'SET-MAX-COUNT':
             return {...state, maxCount: action.value}
-        case 'SWITCH-ERROR':
-            return {...state, error: action.value}
         case 'SWITCH-VALUE-IS-SET':
             return {...state, valueIsSet: action.value}
 

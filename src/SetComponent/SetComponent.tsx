@@ -4,7 +4,7 @@ import {Button} from "../Button/Button";
 import {AppType} from "../App";
 import {SetScreen} from "../SetScreen/SetScreen";
 import {useDispatch, useSelector} from "react-redux";
-import {rootReducerType} from "../bll/store/store";
+import {RootReducerType} from "../bll/store/store";
 import {setCurrentCountAC, switchValueIsSetAC} from "../bll/store/counter-reducer";
 
 type SetComponentPropsType = {
@@ -18,7 +18,7 @@ type SetComponentPropsType = {
 export const SetComponent = (props: SetComponentPropsType) => {
 
     const dispatch = useDispatch()
-    const counter = useSelector<rootReducerType, AppType>(state => state.counter)
+    const counter = useSelector<RootReducerType, AppType>(state => state.counter)
 
     const setValueByButton = () => {
         dispatch(switchValueIsSetAC(!counter.valueIsSet))
