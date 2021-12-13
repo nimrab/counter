@@ -1,19 +1,36 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import css from './SetScreen.module.css'
+import {useDispatch, useSelector} from "react-redux";
+import {rootReducerType} from "../bll/store/store";
+import {AppType} from "../App";
+import {setMaxCountAC, setStartCountAC, switchValueIsSetAC} from "../bll/store/counter-reducer";
 
 
 type SetScreenPropsType = {
-    setMaxValue: (value: number) => void
-    setStartValue: (value: number) => void
-    startCount: number
-    maxCount: number
     error: boolean
 }
 
 export const SetScreen = (props: SetScreenPropsType) => {
 
+    const dispatch = useDispatch()
+    const counter = useSelector<rootReducerType, AppType>(state=> state.counter)
 
     const inputClassName = `${css.input} ${props.error ? css.screen_error : ''}`
+
+
+    const maxValueOnChangeHandler = (event: ChangeEvent<HTMLInputElement> ) => {
+        dispatch(setMaxCountAC(+event.currentTarget.value))
+        dispatch(switchValueIsSetAC(false))
+    }
+
+    const minValueOnChangeHandler = (event: ChangeEvent<HTMLInputElement> ) => {
+        dispatch(setStartCountAC(+event.currentTarget.value))
+        dispatch(switchValueIsSetAC(false))
+    }
+
+
+
+
 
     return (
 
@@ -23,9 +40,9 @@ export const SetScreen = (props: SetScreenPropsType) => {
                 <span className={css.spanText}>max value:</span>
                 <input
                     className={inputClassName}
-                    value={props.maxCount}
+                    value={counter.maxCount}
                     type="number"
-                    onChange={(event) => props.setMaxValue(+event.currentTarget.value)}
+                    onChange={maxValueOnChangeHandler}
                 />
             </div>
 
@@ -33,9 +50,9 @@ export const SetScreen = (props: SetScreenPropsType) => {
                 <span className={css.spanText}>start value:</span>
                 <input
                     className={inputClassName}
-                    value={props.startCount}
+                    value={counter.startCount}
                     type="number"
-                    onChange={(event) => props.setStartValue(+event.currentTarget.value)}
+                    onChange={minValueOnChangeHandler}
 
                 />
             </div>

@@ -3,26 +3,31 @@ import css from "../App.module.css";
 import {Button} from "../Button/Button";
 import {AppType} from "../App";
 import {SetScreen} from "../SetScreen/SetScreen";
+import {useDispatch, useSelector} from "react-redux";
+import {rootReducerType} from "../bll/store/store";
+import {setCurrentCountAC, switchValueIsSetAC} from "../bll/store/counter-reducer";
 
 type SetComponentPropsType = {
-    state: AppType
-    setMaxValue: (value: number) => void
-    setStartValue: (value: number) => void
-    setValueByButton: () => void
     disableSet: boolean
-    btnClassName: string
     error: boolean
+    btnClassName: string
+
 }
 
 
 export const SetComponent = (props: SetComponentPropsType) => {
+
+    const dispatch = useDispatch()
+    const counter = useSelector<rootReducerType, AppType>(state => state.counter)
+
+    const setValueByButton = () => {
+        dispatch(switchValueIsSetAC(!counter.valueIsSet))
+        dispatch(setCurrentCountAC(counter.startCount))
+    }
+
     return (
         <>
             <SetScreen
-                setMaxValue={props.setMaxValue}
-                setStartValue={props.setStartValue}
-                startCount={props.state.startCount}
-                maxCount={props.state.maxCount}
                 error={props.error}
             />
 
@@ -30,11 +35,10 @@ export const SetComponent = (props: SetComponentPropsType) => {
 
                 <Button
                     name={'set'}
-                    callback={props.setValueByButton}
+                    callback={setValueByButton}
                     className={props.btnClassName}
                     disable={props.disableSet}
                 />
-
 
             </div>
         </>
